@@ -1,4 +1,4 @@
-module todo
+module github.com/WebProject05/GoDo
 
 go 1.23.4
 
