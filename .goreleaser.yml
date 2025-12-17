@@ -5,14 +5,15 @@ builds:
     main: .
     goos:
       - windows
+      - linux
+      - darwin
     goarch:
       - amd64
       - arm64
     ldflags:
       - -s -w
 
-archive:
-  format: zip
+# Use default archive formats (zip on Windows, tar.gz on *nix)
 
 changelog:
   use: git

@@ -77,9 +77,9 @@ Goreleaser will build Windows artifacts (zip) and attach them to the GitHub Rele
 
 ## Supported platforms
 
-- Windows (amd64, arm64)
+- Windows, Linux, macOS (amd64, arm64)
 
-If you'd like multi-platform builds (macOS / Linux), tell me and I can enable them in the CI config.
+Multi-platform builds are enabled in CI — releases will include platform-specific archives for Windows (zip) and Unix (tar.gz).
 
 ## Contributing
 
