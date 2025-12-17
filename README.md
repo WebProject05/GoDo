@@ -9,21 +9,55 @@ A tiny CLI to manage a local todo list saved in `todos.json`.
 ```powershell
 # Install the latest release from GitHub
 go install github.com/WebProject05/GoDo@latest
+# make sure $GOBIN or %USERPROFILE%\go\bin is in your PATH
 ```
 
-### From source (build yourself)
+### Windows — installer script (recommended for non-Go users)
+
+Run the installer from the project root in PowerShell:
 
 ```powershell
-# Build locally
+# From PowerShell in the repository root
+.\install.ps1
+
+# If your Execution Policy prevents running scripts, use:
+powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
+```
+
+From Command Prompt (CMD):
+
+```cmd
+powershell -NoProfile -ExecutionPolicy Bypass -File "%CD%\install.ps1"
+```
+
+From PowerShell Core (pwsh):
+
+```bash
+pwsh -NoProfile -ExecutionPolicy Bypass -File ./install.ps1
+```
+
+If you see an error like "provide path to an existing .ps1", that means PowerShell couldn't find the script at the path you provided. Fixes:
+- Make sure you're running the command from the repository root (where `install.ps1` is located) or pass the full absolute path, e.g. `powershell -File C:\full\path\to\GoDo\install.ps1`.
+- Confirm the file exists: `Test-Path .\install.ps1` or `dir install.ps1`.
+- Use the `-ExecutionPolicy Bypass` form if execution policy blocks script execution.
+
+### Build locally (all platforms)
+
+If you prefer building the binary yourself:
+
+```bash
+# clone and build
+git clone https://github.com/WebProject05/GoDo.git
+cd GoDo
+# Windows
 go build -o godo.exe
-.
-# or use the provided installer script on Windows
-powershell -ExecutionPolicy Bypass -File .\install.ps1
+# macOS / Linux
+go build -o godo
 ```
 
 ### From Releases
 
-Pre-built Windows artifacts are published to GitHub Releases when a tag is pushed (see CI section).
+Pre-built artifacts for Windows, Linux, and macOS are published to GitHub Releases when a tag is pushed (see CI section).
 
 ## Usage
 
