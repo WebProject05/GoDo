@@ -111,23 +111,23 @@ go build -o godo
 
 Pre-built artifacts for Windows, Linux, and macOS are published to GitHub Releases when a tag is pushed (see CI section).
 
-## Usage
+## Commands
 
-- List todos:
+Below are the available commands and usage examples. All commands operate on the currently selected table (see "Multi-table support" below).
+
+- List todos in the current table:
 
 ```powershell
 godo -list
 ```
 
-> Tip: If you already have an existing `todos.json` in the old single-list format, running the new binary will automatically migrate those todos into a `default` table.
-
-- Add a todo:
+- Add a todo item (adds to current table):
 
 ```powershell
 godo -add "Buy milk"
 ```
 
-- Toggle completion:
+- Toggle completion by index:
 
 ```powershell
 godo -toggle 0
@@ -139,13 +139,13 @@ godo -toggle 0
 godo -edit 0:New title
 ```
 
-- Delete a todo:
+- Delete a todo by index:
 
 ```powershell
 godo -del 0
 ```
 
-- Create a new table and switch to it:
+- Create a new table and switch to it (name is quoted if it contains spaces):
 
 ```powershell
 godo -newtable "work"
@@ -157,11 +157,24 @@ godo -newtable "work"
 godo -switch "work"
 ```
 
-- List all available tables:
+- List all available tables (current table is marked with `*`):
 
 ```powershell
 godo -alltables
 ```
+
+---
+
+### Multi-table support
+
+GoDo now supports multiple named todo tables (e.g. `default`, `work`, `personal`). Key notes:
+
+- If you have an existing `todos.json` in the old single-list format, the first run of the new binary will automatically migrate those todos into a `default` table.
+- Use `-newtable` to create and switch to a new table; use `-switch` to change the active table; use `-alltables` to see all tables and which one is active.
+
+---
+
+> Tip: After installation you can run the binary from anywhere as `godo -list` (see Install section above).
 
 ## Development
 
