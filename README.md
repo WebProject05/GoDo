@@ -1,4 +1,4 @@
-# GoDo 🚀
+# GoDo - A CLI ToDo List
 
 A tiny CLI to manage a local todo list saved in `todos.json`.
 
@@ -206,4 +206,3 @@ PRs are welcome — please include tests for any new behavior.
 
 ---
 
-If you want, I can add Homebrew/Scoop/Chocolatey manifests to make the CLI available through package managers. 💡
