@@ -7,12 +7,14 @@ A tiny CLI to manage a local todo list saved in `todos.json`.
 ### From source (Go users)
 
 ```powershell
-# Install the latest release from GitHub
-go install github.com/WebProject05/GoDo@latest
+# Install the latest release from GitHub (replace the path with yours if you fork)
+# Example: go install github.com/<your-github-username>/GoDo@latest
 # make sure $GOBIN or %USERPROFILE%\go\bin is in your PATH
+
+go install github.com/WebProject05/GoDo@latest
 ```
 
-### Windows — installer script (recommended for non-Go users)
+### Install globally on Windows (installer script)
 
 Run the installer from the project root in PowerShell:
 
@@ -23,6 +25,56 @@ Run the installer from the project root in PowerShell:
 # If your Execution Policy prevents running scripts, use:
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1
 ```
+
+### Install globally on Unix-like systems (installer script)
+
+```bash
+# Build and install to your $GOBIN (defaults to $HOME/go/bin)
+./install.sh
+# Ensure $GOBIN (or $HOME/go/bin) is in your PATH, for example:
+# export PATH="$HOME/go/bin:$PATH"
+```
+
+---
+
+## Publishing your repository to GitHub
+
+If you want to push this project to GitHub and make `go install` work from anywhere, follow these steps:
+
+1. If you forked or want to use your own account, update the module path in `go.mod` to match your repo:
+
+```bash
+# replace USER and REPO with your GitHub username/repo
+go mod edit -module=github.com/USER/REPO
+git add go.mod
+git commit -m "update module path for publishing"
+```
+
+2. Initialize git (if needed) and push to GitHub:
+
+```bash
+git init
+git add .
+git commit -m "initial commit"
+# create repo on GitHub (use web UI or gh cli)
+# then add remote and push
+git remote add origin git@github.com:USER/REPO.git
+git branch -M main
+git push -u origin main
+```
+
+3. Install via `go install` on any machine:
+
+```bash
+go install github.com/USER/REPO@latest
+```
+
+---
+
+### CI / Releases
+
+A workflow is included (`.github/workflows/build.yml`) that builds the binary for Linux and Windows on pushes to `main` and for releases. On release you can download the generated artifacts from the workflow run or extend the workflow to attach assets to GitHub Releases.
+
 
 From Command Prompt (CMD):
 
@@ -67,6 +119,8 @@ Pre-built artifacts for Windows, Linux, and macOS are published to GitHub Releas
 godo -list
 ```
 
+> Tip: If you already have an existing `todos.json` in the old single-list format, running the new binary will automatically migrate those todos into a `default` table.
+
 - Add a todo:
 
 ```powershell
@@ -89,6 +143,24 @@ godo -edit 0:New title
 
 ```powershell
 godo -del 0
+```
+
+- Create a new table and switch to it:
+
+```powershell
+godo -newtable "work"
+```
+
+- Switch to an existing table:
+
+```powershell
+godo -switch "work"
+```
+
+- List all available tables:
+
+```powershell
+godo -alltables
 ```
 
 ## Development
